@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tech Auth - Login & Register</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Custom Styles */
+        :root {
+            --primary-color: #1E40AF;
+            --secondary-color: #3B82F6;
+            --accent-color: #06B6D4;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #0F172A 0%, #1E293B 100%);
+            min-height: 100vh;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Space Grotesk', sans-serif;
+        }
+        .form-container {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .tech-input {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+        .tech-input:focus {
+            border-color: var(--accent-color);
+            box-shadow: 0 0 15px rgba(6, 182, 212, 0.3);
+        }
+        .tech-button {
+            background: linear-gradient(135deg, var(--secondary-color), var(--accent-color));
+            transition: all 0.3s ease;
+        }
+        .tech-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 20px rgba(6, 182, 212, 0.4);
+        }
+        .form-switch {
+            transition: transform 0.6s ease-in-out;
+        }
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+        .floating-shape {
+            animation: float 6s ease-in-out infinite;
+        }
+    </style>
+</head>
+<body class="text-gray-200">
+    <div class="container mx-auto px-4 py-8 min-h-screen flex flex-col justify-center">
+        <!-- Header -->
+        <div class="text-center mb-8">
+            <h1 class="text-4xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-400 mb-2">
+                Tech Auth
+            </h1>
+            <p class="text-gray-400">Secure Authentication Portal</p>
+        </div>
+
+        <!-- Main Container -->
+        <div class="max-w-md mx-auto w-full relative">
+            <!-- Login Form -->
+            <div id="loginForm" class="form-container rounded-xl p-8 mb-4">
+                <h2 class="text-2xl font-bold mb-6 text-center">Login</h2>
+                <form class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-medium mb-2">Email</label>
+                        <input type="email" class="tech-input w-full px-4 py-2 rounded-lg text-white" placeholder="Enter your email">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium mb-2">Password</label>
+                        <div class="relative">
+                            <input type="password" class="tech-input w-full px-4 py-2 rounded-lg text-white" placeholder="Enter your password">
+                            <button type="button" class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <label class="flex items-center">
+                            <input type="checkbox" class="form-checkbox rounded bg-gray-700 border-gray-600 text-cyan-400">
+                            <span class="ml-2 text-sm">Remember me</span>
+                        </label>
+                        <a href="#" class="text-sm text-cyan-400 hover:text-cyan-300">Forgot password?</a>
+                    </div>
+                    <button type="submit" class="tech-button w-full py-2 rounded-lg text-white font-medium">
+                        Login
+                    </button>
+                </form>
+                <p class="text-center mt-4 text-sm">
+                    Don't have an account? 
+                    <a href="#" onclick="toggleForms()" class="text-cyan-400 hover:text-cyan-300">Register</a>
+                </p>
+            </div>
+
+            <!-- Registration Form -->
+            <div id="registerForm" class="form-container rounded-xl p-8 mb-4 hidden">
+                <h2 class="text-2xl font-bold mb-6 text-center">Create Account</h2>
+                <form class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-medium mb-2">Full Name</label>
+                        <input type="text" class="tech-input w-full px-4 py-2 rounded-lg text-white" placeholder="Enter your full name">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium mb-2">Email</label>
+                        <input type="email" class="tech-input w-full px-4 py-2 rounded-lg text-white" placeholder="Enter your email">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium mb-2">Password</label>
+                        <div class="relative">
+                            <input type="password" class="tech-input w-full px-4 py-2 rounded-lg text-white" placeholder="Create a password">
+                            <button type="button" class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium mb-2">Confirm Password</label>
+                        <div class="relative">
+                            <input type="password" class="tech-input w-full px-4 py-2 rounded-lg text-white" placeholder="Confirm your password">
+                            <button type="button" class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <input type="checkbox" class="form-checkbox mt-1 rounded bg-gray-700 border-gray-600 text-cyan-400">
+                        <span class="ml-2 text-sm">I agree to the <a href="#" class="text-cyan-400 hover:text-cyan-300">Terms of Service</a> and <a href="#" class="text-cyan-400 hover:text-cyan-300">Privacy Policy</a></span>
+                    </div>
+                    <button type="submit" class="tech-button w-full py-2 rounded-lg text-white font-medium">
+                        Create Account
+                    </button>
+                </form>
+                <p class="text-center mt-4 text-sm">
+                    Already have an account? 
+                    <a href="#" onclick="toggleForms()" class="text-cyan-400 hover:text-cyan-300">Login</a>
+                </p>
+            </div>
+
+            <!-- Decorative Elements -->
+            <div class="absolute -z-10 top-0 left-0 w-full h-full overflow-hidden">
+                <div class="floating-shape absolute top-0 left-0 w-32 h-32 bg-gradient-to-r from-blue-500/10 to-cyan-500/10 rounded-full blur-xl"></div>
+                <div class="floating-shape absolute bottom-0 right-0 w-40 h-40 bg-gradient-to-r from-purple-500/10 to-pink-500/10 rounded-full blur-xl" style="animation-delay: -2s;"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleForms() {
+            const loginForm = document.getElementById('loginForm');
+            const registerForm = document.getElementById('registerForm');
+            
+            loginForm.classList.toggle('hidden');
+            registerForm.classList.toggle('hidden');
+        }
+
+        // Toggle password visibility
+        document.querySelectorAll('.fa-eye').forEach(icon => {
+            icon.addEventListener('click', function() {
+                const input = this.parentElement.querySelector('input');
+                if (input.type === 'password') {
+                    input.type = 'text';
+                    this.classList.remove('fa-eye');
+                    this.classList.add('fa-eye-slash');
+                } else {
+                    input.type = 'password';
+                    this.classList.remove('fa-eye-slash');
+                    this.classList.add('fa-eye');
+                }
+            });
+        });
+
+        // Form validation
+        document.querySelectorAll('form').forEach(form => {
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const inputs = this.querySelectorAll('input');
+                let isValid = true;
+
+                inputs.forEach(input => {
+                    if (input.type !== 'checkbox' && !input.value) {
+                        isValid = false;
+                        input.classList.add('border-red-500');
+                    } else {
+                        input.classList.remove('border-red-500');
+                    }
+                });
+
+                if (isValid) {
+                    // Here you would typically send the form data to a server
+                    console.log('Form submitted successfully');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
